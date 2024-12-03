@@ -1,15 +1,28 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { jwtDecode } from 'jwt-decode'; 
+import { BehaviorSubject, Observable } from 'rxjs';
+import { jwtDecode } from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private apiUrl = 'http://localhost:8080/login'; // URL de tu API para login
+  private apiUrl = 'http://localhost:8080/login';
+  private loggedInSource = new BehaviorSubject<boolean>(false);
+  isLoggedIn$ = this.loggedInSource.asObservable();
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    this.checkToken(); 
+  }
+
+  checkToken() {
+    const token = localStorage.getItem('token');
+    if (token) {
+      this.loggedInSource.next(true);
+    } else {
+      this.loggedInSource.next(false);
+    }
+  }
 
   login(user: string, pwd: string): Observable<string> {
     const body = new URLSearchParams();
@@ -24,12 +37,12 @@ export class AuthService {
   }
 
   getRoles(token: string): string[] {
-    const decoded: any = jwtDecode(token); // Decodifica el token JWT
-    return decoded.authorities || []; // Devuelve los roles del token
+    const decoded: any = jwtDecode(token); 
+    return decoded.authorities || [];
   }
 
-  decodeHeader(token: string): any {
-    const decodedHeader = jwtDecode(token, { header: true }); // Decodifica solo el encabezado
-    return decodedHeader;
+  logout(): void {
+    localStorage.removeItem('token');
+    this.loggedInSource.next(false);
   }
 }

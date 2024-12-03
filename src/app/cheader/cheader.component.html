@@ -19,6 +19,82 @@
         <li class="nav-item">
           <a class="nav-link" href="#team">¿Quiénes somos?</a>
         </li>
+        
+        <!-- Links for logged-in users -->
+        <ng-container *ngIf="isLoggedIn">
+          <ng-container *ngIf="isUserRole('USUARIO')">
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/user/dashboard">Dashboard</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/user/add-incident">Agregar Incidente</a>
+            </li>
+            <!-- <li class="nav-item">
+              <a class="nav-link" routerLink="/user/all-incident">Ver Incidentes</a>
+            </li> -->
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/user/update-incident/:id">Actualizar Incidentes</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/user/profile">Perfil</a>
+            </li>
+          </ng-container>
+
+          <ng-container *ngIf="isUserRole('ADMINISTRADOR')">
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/admin/dashboard">Dashboard</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/admin/add-category">Agregar Categoría</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/admin/all-categories">Todas las Categorías</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" routerLink="/admin/update-category/:id">Actualizar Categorías</a>
+            </li>
+          </ng-container>
+
+          <li class="nav-item">
+            <a class="nav-link" (click)="logout()">Cerrar Sesión</a>
+          </li>
+        </ng-container>
+
+        <!-- Links for guests -->
+        <ng-container *ngIf="!isLoggedIn">
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/login">Iniciar Sesión</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/register">Registrarse</a>
+          </li>
+        </ng-container>
+
+      </ul>
+    </nav>
+  </div>
+</header>
+<!-- <header class="header navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container">
+    <div class="logo-container">
+      <a href="/" class="navbar-brand"> 
+        <img src="https://i.ytimg.com/vi/gH0-EEqvJYU/maxresdefault.jpg" alt="Logo" class="logo" />
+      </a>
+    </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <nav class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="#about">¿Qué es?</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#services">Nuestros servicios</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#team">¿Quiénes somos?</a>
+        </li>
         <li class="nav-item">
           <a class="nav-link" routerLink="/login">Iniciar Sesión</a>
         </li>
@@ -28,4 +104,4 @@
       </ul>
     </nav>
   </div>
-</header>
+</header> -->

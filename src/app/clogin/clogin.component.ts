@@ -1,16 +1,16 @@
 import { Component } from '@angular/core';
-import { AuthService } from '../service/auth.service'; // Asegúrate de importar correctamente
+import { AuthService } from '../service/auth.service'; 
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-clogin',
   templateUrl: './clogin.component.html',
-  styleUrl: './clogin.component.css'
+  styleUrls: ['./clogin.component.css'] 
 })
 export class CloginComponent {
   user: string = '';
   pwd: string = '';
-  errorMessage: string = ''; // Para almacenar mensajes de error
+  errorMessage: string = ''; 
 
   constructor(private authService: AuthService, private router: Router) {}
 
@@ -18,24 +18,24 @@ export class CloginComponent {
     this.authService.login(this.user, this.pwd).subscribe(
       token => {
         console.log('Token recibido:', token);
-        localStorage.setItem('token', token); // Almacena el token
+        localStorage.setItem('token', token); 
         
-        // Decodificar el token para obtener los roles
         const roles = this.authService.getRoles(token);
-        console.log('Roles:', roles); // Muestra los roles en la consola
+        console.log('Roles:', roles); 
         
-        // Redirigir según el rol
+        this.authService['loggedInSource'].next(true); 
+
         if (roles.includes('ADMINISTRADOR')) {
-          this.router.navigate(['/admin']); // Redirige a admin si es administrador
+          this.router.navigate(['/admin']); 
         } else if (roles.includes('USUARIO')) {
-          this.router.navigate(['/user']); // Redirige a user si es usuario
+          this.router.navigate(['/user']); 
         } else {
-          this.router.navigate(['/login']); // Redirige a login si no tiene un rol válido
+          this.router.navigate(['/login']); 
         }
       },
       error => {
         console.error('Error al iniciar sesión:', error);
-        this.errorMessage = 'Credenciales incorrectas. Inténtalo nuevamente.'; // Mensaje de error
+        this.errorMessage = 'Credenciales incorrectas. Inténtalo nuevamente.';
       }
     );
   }
