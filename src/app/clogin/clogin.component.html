@@ -1,0 +1,22 @@
+<div class="container vh-100 d-flex justify-content-center align-items-center">
+    <div class="card" style="width: 70%;">
+        <div class="card-body text-center">
+            <div class="mb-4">
+                <img src="https://cdn3d.iconscout.com/3d/premium/thumb/profile-3d-icon-download-in-png-blend-fbx-gltf-file-formats--user-avatar-account-interface-pack-icons-5220669.png?f=webp" alt="Profile" class="profile-image" />
+            </div>
+            <h3 class="card-title">Iniciar Sesión</h3>
+            <form (ngSubmit)="onSubmit()">
+                <div class="form-group text-left">
+                    <label for="user">Correo Electrónico</label>
+                    <input type="text" class="form-control" id="user" [(ngModel)]="user" name="user" required placeholder="Ingresa tu correo electrónico">
+                </div>
+                <div class="form-group text-left">
+                    <label for="pwd">Contraseña</label>
+                    <input type="password" class="form-control" id="pwd" [(ngModel)]="pwd" name="pwd" required placeholder="Ingresa tu contraseña">
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Iniciar Sesión</button>
+            </form>
+            <div *ngIf="errorMessage" class="alert alert-danger mt-3">{{ errorMessage }}</div>
+        </div>
+    </div>
+</div>
