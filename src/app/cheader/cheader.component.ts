@@ -6,7 +6,8 @@ import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-cheader',
   templateUrl: './cheader.component.html',
-  styleUrl: './cheader.component.css'
+  styleUrl: './cheader.component.css',
+  standalone: false
 })
 export class CheaderComponent implements OnInit, OnDestroy {
 

@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { User } from '../model/user.model';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+import { User } from '../model/user.model'; 
 
 @Injectable({
   providedIn: 'root'
@@ -9,13 +10,22 @@ import { User } from '../model/user.model';
 export class UserService {
   private apiUrl = 'http://localhost:8080/api/users';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
-  getUsers(): Observable<User[]> {
-    return this.http.get<User[]>(this.apiUrl);
+  registerUser(user: User): Observable<string> {
+    return this.http.post<string>(`${this.apiUrl}/register`, user).pipe(
+      catchError(this.handleError)
+    );
   }
 
-  createUser(user: User): Observable<User> {
-    return this.http.post<User>(this.apiUrl, user);
+  private handleError(error: HttpErrorResponse) {
+    let errorMessage = 'Ocurrió un error desconocido.';
+    if (error.error instanceof ErrorEvent) {
+      errorMessage = `Error: ${error.error.message}`;
+    } else {
+      errorMessage = `Código de estado: ${error.status}, Mensaje: ${error.message}`;
+    }
+    console.error(errorMessage);
+    return throwError(() => new Error(errorMessage));
   }
 }

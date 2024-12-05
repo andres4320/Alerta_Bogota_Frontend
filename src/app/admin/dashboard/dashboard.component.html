@@ -1,1 +1,45 @@
-<p>dashboard works!</p>
+<div class="container">
+    <h1>Dashboard de Incidencias en Bogotá</h1>
+    
+    <div class="row">
+      <div class="col-md-4">
+        <label for="localidad">Localidad</label>
+        <select id="localidad" class="form-control">
+          <option *ngFor="let localidad of localidades">{{ localidad }}</option>
+        </select>
+      </div>
+      
+      <div class="col-md-4">
+        <label for="categoria">Categoría</label>
+        <select id="categoria" class="form-control">
+          <option *ngFor="let categoria of categorias">{{ categoria }}</option>
+        </select>
+      </div>
+      
+      <div class="col-md-4">
+        <label for="fecha">Fecha</label>
+        <input type="date" id="fecha" class="form-control">
+      </div>
+    </div>
+  
+    <h2>Gráficos</h2>
+    <!-- Aquí se pueden incluir gráficos usando Chart.js o D3.js -->
+  
+    <h2>Lista de Incidencias</h2>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Fecha</th>
+          <th>Localidad</th>
+          <th>Categoría</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let incidencia of incidencias">
+          <td>{{ incidencia.fecha }}</td>
+          <td>{{ incidencia.localidad }}</td>
+          <td>{{ incidencia.categoria }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>

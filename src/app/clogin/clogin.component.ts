@@ -5,7 +5,8 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-clogin',
   templateUrl: './clogin.component.html',
-  styleUrls: ['./clogin.component.css'] 
+  styleUrls: ['./clogin.component.css'],
+  standalone: false
 })
 export class CloginComponent {
   user: string = '';

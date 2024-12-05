@@ -5,37 +5,37 @@
                 <img src="https://cdn3d.iconscout.com/3d/premium/thumb/profile-3d-icon-download-in-png-blend-fbx-gltf-file-formats--user-avatar-account-interface-pack-icons-5220669.png?f=webp" alt="Profile" class="profile-image" />
             </div>
             <h3 class="card-title">Registro</h3>
-            <form (ngSubmit)="onSubmit(registerForm.value)" #registerForm="ngForm">
+            <form (ngSubmit)="register()" #registerForm="ngForm">
                 <div class="form-group text-left">
                     <label for="primer_nombre">Primer Nombre</label>
-                    <input type="text" class="form-control" id="primer_nombre" name="primer_nombre" ngModel required placeholder="Ingresa tu primer nombre">
+                    <input type="text" class="form-control" id="primer_nombre" name="primerNombre" [(ngModel)]="user.primerNombre" required placeholder="Ingresa tu primer nombre">
                 </div>
                 <div class="form-group text-left">
                     <label for="segundo_nombre">Segundo Nombre</label>
-                    <input type="text" class="form-control" id="segundo_nombre" name="segundo_nombre" ngModel placeholder="Ingresa tu segundo nombre (opcional)">
+                    <input type="text" class="form-control" id="segundo_nombre" name="segundoNombre" [(ngModel)]="user.segundoNombre" placeholder="Ingresa tu segundo nombre (opcional)">
                 </div>
                 <div class="form-group text-left">
                     <label for="primer_apellido">Primer Apellido</label>
-                    <input type="text" class="form-control" id="primer_apellido" name="primer_apellido" ngModel required placeholder="Ingresa tu primer apellido">
+                    <input type="text" class="form-control" id="primer_apellido" name="primerApellido" [(ngModel)]="user.primerApellido" required placeholder="Ingresa tu primer apellido">
                 </div>
                 <div class="form-group text-left">
                     <label for="segundo_apellido">Segundo Apellido</label>
-                    <input type="text" class="form-control" id="segundo_apellido" name="segundo_apellido" ngModel placeholder="Ingresa tu segundo apellido (opcional)">
+                    <input type="text" class="form-control" id="segundo_apellido" name="segundoApellido" [(ngModel)]="user.segundoApellido" placeholder="Ingresa tu segundo apellido (opcional)">
                 </div>
                 <div class="form-group text-left">
                     <label for="use_email">Correo Electrónico</label>
-                    <input type="email" class="form-control" id="use_email" name="use_email" ngModel required placeholder="Ingresa tu correo electrónico">
+                    <input type="email" class="form-control" id="use_email" name="useEmail" [(ngModel)]="user.useEmail" required placeholder="Ingresa tu correo electrónico">
                 </div>
                 <div class="form-group text-left">
                     <label for="use_pass">Contraseña</label>
-                    <input type="password" class="form-control" id="use_pass" name="use_pass" ngModel required placeholder="Crea una contraseña">
+                    <input type="password" class="form-control" id="use_pass" name="usePass" [(ngModel)]="user.usePass" required placeholder="Crea una contraseña">
                 </div>
                 <div class="form-group text-left">
                     <label for="rol_id">Rol</label>
-                    <select class="form-control" id="rol_id" name="rol_id" ngModel required>
+                    <select class="form-control" id="rol_id" name="rolId" [(ngModel)]="user.rolId" required>
                         <option value="" disabled selected>Selecciona un rol</option>
-                        <option value="admin">Administrador</option>
-                        <option value="user">Usuario</option>
+                        <option value="1">Administrador</option>
+                        <option value="2">Usuario</option>
                     </select>
                 </div>
                 <button type="submit" class="btn btn-primary btn-block">Registrarse</button>

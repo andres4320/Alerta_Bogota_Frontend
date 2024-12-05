@@ -1,10 +1,11 @@
 export interface User {
-    id?: number; // Opcional si es autogenerado
-    primer_nombre: string;
-    segundo_nombre?: string;
-    primer_apellido: string;
-    segundo_apellido?: string;
-    use_email: string;
-    use_pass: string;
-    rol_id: string; // 'admin' o 'user'
-  }
+  usuarioId: number;
+  fechaRegistro: string;
+  primerApellido: string;
+  primerNombre: string;
+  rolId: number;
+  segundoApellido: string;
+  segundoNombre: string;
+  useEmail: string;
+  usePass: string;
+}
