@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "Alerta_Bogota_Frontend": {
+    "alerta-bogota-frontend": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -69,10 +69,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "Alerta_Bogota_Frontend:build:production"
+              "buildTarget": "alerta-bogota-frontend:build:production"
             },
             "development": {
-              "buildTarget": "Alerta_Bogota_Frontend:build:development"
+              "buildTarget": "alerta-bogota-frontend:build:development"
             }
           },
           "defaultConfiguration": "development"

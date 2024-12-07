@@ -9,6 +9,8 @@ import { CfooterComponent } from './cfooter/cfooter.component';
 import { CheaderComponent } from './cheader/cheader.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
+import { getAuth, provideAuth } from '@angular/fire/auth';
 
 @NgModule({
   declarations: [
@@ -23,9 +25,12 @@ import { AppComponent } from './app.component';
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
-    FormsModule 
+    FormsModule,
   ],
-  providers: [],
+  providers: [
+    provideFirebaseApp(() => initializeApp({"projectId":"alerta-bogota-b4d27","appId":"1:422737468506:web:87168c884f78248ae04c63","storageBucket":"alerta-bogota-b4d27.firebasestorage.app","apiKey":"AIzaSyCT4DqqI7iNUU7pePh0XY58FV6kqcDcDhc","authDomain":"alerta-bogota-b4d27.firebaseapp.com","messagingSenderId":"422737468506"})),
+    provideAuth(() => getAuth())
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
