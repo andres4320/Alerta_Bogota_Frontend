@@ -7,5 +7,5 @@ import { Component } from '@angular/core';
   standalone: false
 })
 export class AppComponent {
-  title = 'Alerta_Bogota_Frontend';
+  title = 'alerta-bogota-frontend';
 }

@@ -18,7 +18,6 @@ export class UserService {
     );
   }
 
- 
   listAllUsers(): Observable<User[]> {
     return this.http.get<User[]>(`${this.apiUrl}/all-users`).pipe(
       catchError(this.handleError)
