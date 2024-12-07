@@ -18,6 +18,19 @@ export class UserService {
     );
   }
 
+
+  listAllUsers(): Observable<User[]> {
+    return this.http.get<User[]>(`${this.apiUrl}/all-users`).pipe(
+      catchError(this.handleError)
+    );
+  }
+  
+  deleteUser(userId: number): Observable<string> {
+    return this.http.delete<string>(`${this.apiUrl}/delete`, { body: { usuarioId: userId } }).pipe(
+      catchError(this.handleError)
+    );
+  }
+
   private handleError(error: HttpErrorResponse) {
     let errorMessage = 'Ocurrió un error desconocido.';
     if (error.error instanceof ErrorEvent) {
