@@ -8,6 +8,7 @@ import { UpdateIncidentComponent } from './update-incident/update-incident.compo
 import { ProfileComponent } from './profile/profile.component';
 import { AllIncidentComponent } from './all-incident/all-incident.component';
 import { GoogleMapsModule } from '@angular/google-maps';
+import { BaseChartDirective } from 'ng2-charts';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { GoogleMapsModule } from '@angular/google-maps';
     CommonModule,
     UserRoutingModule,
     FormsModule,
-    GoogleMapsModule 
+    GoogleMapsModule,
+    BaseChartDirective
   ]
   
 })

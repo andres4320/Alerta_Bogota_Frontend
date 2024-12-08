@@ -1,8 +1,11 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { Incident } from '../model/incident.model'; 
+import { LocalityCount } from '../model/locality-count.model';
+import { CategoryCount } from '../model/category-count.model';
+import { DateCount } from '../model/date-count.model';
 
 @Injectable({
   providedIn: 'root'
@@ -27,5 +30,29 @@ export class IncidentService {
     }
     console.error(errorMessage);
     return throwError(() => new Error(errorMessage));
+  }
+
+  getCountByLocality(): Observable<LocalityCount[]> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('token')}`
+    });
+    return this.http.get<LocalityCount[]>(`${this.apiUrl}/countByLocality`, { headers });
+  }
+
+  getCountByCategory(): Observable<CategoryCount[]> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('token')}`
+    });
+    return this.http.get<CategoryCount[]>(`${this.apiUrl}/countByCategory`, { headers });
+  }
+
+  getCountByDate(): Observable<DateCount[]> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('token')}`
+    });
+    return this.http.get<DateCount[]>(`${this.apiUrl}/countByDate`, { headers });
   }
 }
