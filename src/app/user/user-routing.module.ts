@@ -12,6 +12,7 @@ const routes: Routes = [
   { path: 'add-incident', component: AddIncidentComponent, canActivate: [AuthGuard], data: { expectedRole: 'USUARIO' } },
   { path: 'update-incident/:id', component: UpdateIncidentComponent, canActivate: [AuthGuard], data: { expectedRole: 'USUARIO' } },
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard], data: { expectedRole: 'USUARIO' } },
+  { path: 'all-incident', component: AllIncidentComponent , canActivate: [AuthGuard], data: { expectedRole: 'USUARIO' } },
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' }, 
 ];
 

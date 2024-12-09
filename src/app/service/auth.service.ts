@@ -26,17 +26,30 @@ export class AuthService {
     });
   }
 
-  login(user: string, pwd: string): Observable<string> {
+  login(user: string, pwd: string): Observable<any> {
     const body = new URLSearchParams();
     body.set('user', user);
     body.set('pwd', pwd);
-
+  
     const headers = new HttpHeaders({
       'Content-Type': 'application/x-www-form-urlencoded'
     });
-
-    return this.http.post(this.apiUrl, body.toString(), { headers, responseType: 'text' });
+  
+    return this.http.post<any>(this.apiUrl, body.toString(), { headers });
   }
+  
+
+  // login(user: string, pwd: string): Observable<string> {
+  //   const body = new URLSearchParams();
+  //   body.set('user', user);
+  //   body.set('pwd', pwd);
+
+  //   const headers = new HttpHeaders({
+  //     'Content-Type': 'application/x-www-form-urlencoded'
+  //   });
+
+  //   return this.http.post(this.apiUrl, body.toString(), { headers, responseType: 'text' });
+  // }
 
   loginWithGoogle(): Observable<any> {
     const provider = new GoogleAuthProvider();
@@ -105,7 +118,7 @@ export class AuthService {
         console.error("Token inválido:", token);
         return [];
     }
-
+  
     try {
         const decoded: any = jwtDecode(token);
         return decoded.authorities || [];
@@ -114,6 +127,21 @@ export class AuthService {
         return []; 
     }
   }
+  
+  // getRoles(token: string): string[] {
+  //   if (!token || typeof token !== 'string') {
+  //       console.error("Token inválido:", token);
+  //       return [];
+  //   }
+
+  //   try {
+  //       const decoded: any = jwtDecode(token);
+  //       return decoded.authorities || [];
+  //   } catch (error) {
+  //       console.error("Error al decodificar el token:", error);
+  //       return []; 
+  //   }
+  // }
 
   logout(): Promise<void> {
     return this.auth.signOut().then(() => {

@@ -1,4 +1,5 @@
 export interface Incident {
+  incidencia_id:number,
   descripcion: string,
   direccion: string,
   fecha: Date,

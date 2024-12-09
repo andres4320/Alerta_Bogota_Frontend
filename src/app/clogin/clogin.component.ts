@@ -17,17 +17,20 @@ export class CloginComponent {
 
   constructor(private authService: AuthService, private userService: UserService, private router: Router) {}
 
+
   onSubmit() {
     this.authService.login(this.user, this.pwd).subscribe(
-      token => {
-        console.log('Token recibido:', token);
-        localStorage.setItem('token', token);
+      response => {
+        console.log('Token recibido:', response.token);
+        localStorage.setItem('token', response.token); // Guardar el token
+        localStorage.setItem('usuario', JSON.stringify(response.usuario)); // Guardar los datos del usuario
         
-        const roles = this.authService.getRoles(token);
+        const roles = this.authService.getRoles(response.token); // Obtener los roles desde el token
         console.log('Roles:', roles);
-        
-        this.authService['loggedInSource'].next(true);
-
+  
+        this.authService.loggedInSource.next(true);
+  
+        // Redirigir según el rol
         if (roles.includes('ADMINISTRADOR')) {
           this.router.navigate(['/admin']);
         } else if (roles.includes('USUARIO')) {
@@ -42,6 +45,32 @@ export class CloginComponent {
       }
     );
   }
+  
+  // onSubmit() {
+  //   this.authService.login(this.user, this.pwd).subscribe(
+  //     token => {
+  //       console.log('Token recibido:', token);
+  //       localStorage.setItem('token', token);
+        
+  //       const roles = this.authService.getRoles(token);
+  //       console.log('Roles:', roles);
+        
+  //       this.authService['loggedInSource'].next(true);
+
+  //       if (roles.includes('ADMINISTRADOR')) {
+  //         this.router.navigate(['/admin']);
+  //       } else if (roles.includes('USUARIO')) {
+  //         this.router.navigate(['/user']);
+  //       } else {
+  //         this.router.navigate(['/login']);
+  //       }
+  //     },
+  //     error => {
+  //       console.error('Error al iniciar sesión:', error);
+  //       this.errorMessage = 'Credenciales incorrectas. Inténtalo nuevamente.';
+  //     }
+  //   );
+  // }
 
   loginWithGoogle() {
     this.loading = true;
