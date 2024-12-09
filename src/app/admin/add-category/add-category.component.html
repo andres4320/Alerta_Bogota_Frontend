@@ -1,1 +1,43 @@
-<p>add-category works!</p>
+<div class="container mt-4">
+    <h2 class="mb-4">Agregar Categoría</h2>
+  
+    <!-- Alertas -->
+    <div *ngIf="alerts.length > 0" class="mb-3">
+      <alert
+        *ngFor="let alert of alerts; let i = index"
+        [type]="alert.type"
+        (onClosed)="closeAlert(i)"
+        [dismissible]="true"
+      >
+        {{ alert.message }}
+      </alert>
+    </div>
+  
+    <!-- Formulario de agregar categoría -->
+    <form (ngSubmit)="addCategory()">
+      <div class="mb-3">
+        <label for="nombre" class="form-label">Nombre</label>
+        <input
+          type="text"
+          id="nombre"
+          class="form-control"
+          [(ngModel)]="categoria.nombreCategoria"
+          name="nombre_categoria"
+          required
+        />
+      </div>
+      <div class="mb-3">
+        <label for="descripcion" class="form-label">Descripción</label>
+        <input
+          type="text"
+          id="descripcion"
+          class="form-control"
+          [(ngModel)]="categoria.descripcionCategoria"
+          name="descripcion_categoria"
+          required
+        />
+      </div>
+      <button type="submit" class="btn btn-primary">Agregar</button>
+    </form>
+  </div>
+  
