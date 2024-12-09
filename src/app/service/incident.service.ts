@@ -58,12 +58,13 @@ export class IncidentService {
 
 // Método para obtener las incidencias de un usuario
     getIncidenciasByUsuarioId(usuarioId: number): Observable<any[]> {
+      console.log('Obteniendo incidencias para el usuario ID:', usuarioId);
       const headers = new HttpHeaders({
         'Content-Type': 'application/json',
         Authorization: `Bearer ${localStorage.getItem('token')}`
       });
 
-      return this.http.get<any[]>(`${this.apiUrl}/searchByUsuario/${usuarioId}`, { headers });
+      return this.http.get<any[]>(`${this.apiUrl}/searchByUsuario?usuarioId=${usuarioId}`, { headers });
     }
 
     // Método para eliminar una incidencia
@@ -73,6 +74,6 @@ export class IncidentService {
         Authorization: `Bearer ${localStorage.getItem('token')}`
       });
 
-      return this.http.delete(`${this.apiUrl}/${id}`, { headers });
+      return this.http.delete(`${this.apiUrl}/deleteIncidence?id=${id}`, { headers, responseType: 'text' as 'json' });
   }  
 }

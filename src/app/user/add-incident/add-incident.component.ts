@@ -12,7 +12,7 @@ import { Incident } from '../../model/incident.model';
 export class AddIncidentComponent {
   apiKey: string = 'AIzaSyA3OEndwZOWLjNf19eM9lcOlc0YHyalWrI'; 
   incident: Incident = {
-    incidencia_id: 0,
+    incidenciaId: 0,
     descripcion: '',
     direccion: '',
     fecha: new Date(),

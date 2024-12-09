@@ -8,6 +8,8 @@ import { UpdateIncidentComponent } from './update-incident/update-incident.compo
 import { ProfileComponent } from './profile/profile.component';
 import { AllIncidentComponent } from './all-incident/all-incident.component';
 import { GoogleMapsModule } from '@angular/google-maps';
+import { AlertModule } from 'ngx-bootstrap/alert';
+
 //import { BaseChartDirective } from 'ng2-charts';
 
 
@@ -24,6 +26,8 @@ import { GoogleMapsModule } from '@angular/google-maps';
     UserRoutingModule,
     FormsModule,
     GoogleMapsModule,
+    AlertModule.forRoot(),
+
   //  BaseChartDirective
   ]
   

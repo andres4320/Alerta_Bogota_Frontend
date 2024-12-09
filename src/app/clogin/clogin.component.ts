@@ -24,7 +24,7 @@ export class CloginComponent {
         console.log('Token recibido:', response.token);
         localStorage.setItem('token', response.token); // Guardar el token
         localStorage.setItem('usuario', JSON.stringify(response.usuario)); // Guardar los datos del usuario
-        
+        console.log('Usuario guardado en localStorage:', response.usuario);
         const roles = this.authService.getRoles(response.token); // Obtener los roles desde el token
         console.log('Roles:', roles);
   

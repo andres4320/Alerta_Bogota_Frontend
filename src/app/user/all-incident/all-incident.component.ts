@@ -21,8 +21,8 @@ export class AllIncidentComponent implements OnInit {
   // Método para obtener las incidencias del usuario
   getIncidencias() {
     const usuario = JSON.parse(localStorage.getItem('usuario') || '{}');
-    const usuarioId = usuario.id;  // Obtén el ID del usuario desde el localStorage
-
+    const usuarioId = usuario.usuarioId;  // Obtén el ID del usuario desde el localStorage
+    console.log('ID del usuario:', usuarioId);
     if (!usuarioId) {
       this.errorMessage = 'No se ha encontrado el usuario. Asegúrate de estar autenticado.';
       return;
@@ -31,6 +31,7 @@ export class AllIncidentComponent implements OnInit {
     this.incidentService.getIncidenciasByUsuarioId(usuarioId).subscribe({
       next: (data) => {
         this.incidencias = data;
+        console.log('Usuarios cargados:', this.incidencias);
       },
       error: (err) => {
         console.error('Error al obtener incidencias:', err);
@@ -44,7 +45,7 @@ export class AllIncidentComponent implements OnInit {
     if (confirm('¿Estás seguro de eliminar esta incidencia?')) {
       this.incidentService.deleteIncidencia(id).subscribe({
         next: () => {
-          this.incidencias = this.incidencias.filter(incidencia => incidencia.incidencia_id !== id);
+          this.incidencias = this.incidencias.filter(incidencia => incidencia.incidenciaId !== id);
         },
         error: (err) => {
           console.error('Error al eliminar incidencia:', err);
