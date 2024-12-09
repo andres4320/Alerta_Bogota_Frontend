@@ -1,3 +1,13 @@
 .container {
     margin-bottom: 50px; 
 }
+
+.card-fixed-height {
+    height: 300px; /* Ajusta la altura según sea necesario */
+}
+
+.card-body {
+    display: flex;
+    justify-content: center; /* Centrar contenido horizontalmente */
+    align-items: center; /* Centrar contenido verticalmente */
+}

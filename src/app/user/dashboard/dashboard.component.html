@@ -7,7 +7,7 @@
   </div>
 
   <div *ngIf="!isLoading">
-    <div class="card">
+    <div class="card shadow">
       <div class="card-header text-center">
         <h1 class="mb-0">Dashboard de Incidencias</h1>
       </div>
@@ -17,9 +17,9 @@
 
           <!-- Gráfico por Localidad -->
           <div class="col-md-6 mb-4">
-            <div class="card">
-              <div class="card-header">
-                Gráfico de Incidencias por Localidad
+            <div class="card shadow"> <!-- Agregar clase shadow aquí -->
+              <div class="card-header text-center"> <!-- Centrar el texto -->
+                <strong>Gráfico de Incidencias por Localidad</strong> <!-- Título en negrita -->
               </div>
               <div class="card-body">
                 <canvas baseChart
@@ -35,9 +35,9 @@
 
           <!-- Gráfico por Categoría -->
           <div class="col-md-6 mb-4">
-            <div class="card">
-              <div class="card-header">
-                Gráfico de Incidencias por Categoría
+            <div class="card shadow"> <!-- Agregar clase shadow aquí -->
+              <div class="card-header text-center"> <!-- Centrar el texto -->
+                <strong>Gráfico de Incidencias por Categoría</strong> <!-- Título en negrita -->
               </div>
               <div class="card-body">
                 <canvas baseChart
@@ -51,11 +51,11 @@
             </div>
           </div>
 
-          <!-- Gráfico por Fecha -->
-          <div class="col-md-6 mb-4">
-            <div class="card">
-              <div class="card-header">
-                Gráfico de Incidencias por Fecha
+          <!-- Gráfico por Fecha (ocupa todo el ancho) -->
+          <div class="col-md-8 mx-auto mb-4">
+            <div class="card shadow card-fixed-height"> 
+              <div class="card-header text-center">
+                <strong>Gráfico de Incidencias por Fecha</strong>
               </div>
               <div class="card-body">
                 <canvas baseChart
