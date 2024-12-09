@@ -1,45 +1,98 @@
-<div class="container">
-    <h1>Dashboard de Incidencias en Bogotá</h1>
-    
-    <div class="row">
-      <div class="col-md-4">
-        <label for="localidad">Localidad</label>
-        <select id="localidad" class="form-control">
-          <option *ngFor="let localidad of localidades">{{ localidad }}</option>
-        </select>
-      </div>
-      
-      <div class="col-md-4">
-        <label for="categoria">Categoría</label>
-        <select id="categoria" class="form-control">
-          <option *ngFor="let categoria of categorias">{{ categoria }}</option>
-        </select>
-      </div>
-      
-      <div class="col-md-4">
-        <label for="fecha">Fecha</label>
-        <input type="date" id="fecha" class="form-control">
-      </div>
+<div class="container mt-4">
+  <div *ngIf="isLoading" class="text-center">
+    <div class="spinner-border" role="status">
+      <span class="sr-only">Cargando...</span>
     </div>
-  
-    <h2>Gráficos</h2>
-    <!-- Aquí se pueden incluir gráficos usando Chart.js o D3.js -->
-  
-    <h2>Lista de Incidencias</h2>
-    <table class="table">
-      <thead>
-        <tr>
-          <th>Fecha</th>
-          <th>Localidad</th>
-          <th>Categoría</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let incidencia of incidencias">
-          <td>{{ incidencia.fecha }}</td>
-          <td>{{ incidencia.localidad }}</td>
-          <td>{{ incidencia.categoria }}</td>
-        </tr>
-      </tbody>
-    </table>
+    <p>Cargando datos, por favor espere...</p>
   </div>
+  <div *ngIf="!isLoading">
+    <div class="card shadow">
+      <div class="card-header text-center">
+        <h1 class="mb-0">Dashboard de Incidencias</h1>
+      </div>
+      <div class="card-body">
+        <div class="row mb-4">
+          <div class="col-md-6">
+            <div class="card">
+              <div class="card-header text-center">
+                <strong>Total de Incidencias: {{ totalIncidences }}</strong>
+              </div>
+              <div class="card-body">
+                <canvas baseChart
+                        [data]="incidenceChartData"
+                        [options]="chartOptions"
+                        [legend]="true"
+                        [type]="'bar'">
+                </canvas>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="card shadow">
+              <div class="card-header text-center">
+                <strong>Total Categorías: {{ totalCategories }}</strong>
+              </div>
+              <div class="card-body">
+                <canvas baseChart
+                        [data]="categoryChartData"
+                        [options]="chartOptions"
+                        [legend]="true"
+                        [type]="'bar'">
+                </canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row mb-4">
+          <div class="col-md-6">
+            <div class="card shadow">
+              <div class="card-header text-center">
+                <strong>Usuarios por Rol</strong>
+              </div>
+              <div class="card-body">
+                <canvas baseChart
+                        [data]="userRolesChartData"
+                        [options]="chartOptions"
+                        [legend]="true"
+                        [type]="'bar'">
+                </canvas>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="card shadow">
+              <div class="card-header text-center">
+                <strong>Registro Usuario por Mes</strong>
+              </div>
+              <div class="card-body">
+                <canvas baseChart
+                        [data]="registrationMonthChartData"
+                        [options]="chartOptions"
+                        [legend]="true"
+                        [type]="'bar'">
+                </canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row mb-4">
+          <div class="col-md-12">
+            <div class="card shadow">
+              <div class="card-header text-center">
+                <strong>Categorías Más Usadas</strong>
+              </div>
+              <div class="card-bod pie-chart-container">
+                <canvas baseChart
+                        [data]="categoriesPieChartData"
+                        [options]="chartOptionsPie" 
+                        [legend]="true"
+                        [type]="'pie'"> 
+                </canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> 
+    </div> 
+  </div> 
+</div>

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { User } from '../model/user.model'; 
@@ -26,6 +26,26 @@ export class UserService {
 
   deleteUser(userId: number): Observable<string> {
     return this.http.delete<string>(`${this.apiUrl}/delete`, { body: { usuarioId: userId } }).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  getStatsByRoles(): Observable<any[]> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('token')}`
+    });
+    return this.http.get<any[]>(`${this.apiUrl}/count-users-roles`, { headers }).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  getStatsByRegistrationMonth(): Observable<any[]> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('token')}`
+    });
+    return this.http.get<any[]>(`${this.apiUrl}/registration-months`, { headers }).pipe(
       catchError(this.handleError)
     );
   }

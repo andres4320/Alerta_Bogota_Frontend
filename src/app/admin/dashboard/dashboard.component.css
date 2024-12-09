@@ -1,0 +1,9 @@
+.container {
+    margin-bottom: 50px; 
+}
+
+.pie-chart-container {
+    width: 300px; 
+    height: 300px; 
+    margin: auto;
+}

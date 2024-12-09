@@ -21,6 +21,37 @@ export class IncidentService {
     );
   }
 
+  getTotalIncidences(): Observable<number> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('token')}`
+    });
+    return this.http.get<number>(`${this.apiUrl}/countIncidence`, { headers });
+  }
+  
+  getCountByLocality(): Observable<LocalityCount[]> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('token')}`
+    });
+    return this.http.get<LocalityCount[]>(`${this.apiUrl}/countByLocality`, { headers });
+  }
+  
+  getCountByCategory(): Observable<CategoryCount[]> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('token')}`
+    });
+    return this.http.get<CategoryCount[]>(`${this.apiUrl}/countByCategory`, { headers });
+  }
+  
+  getCountByDate(): Observable<DateCount[]> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('token')}`
+    });
+    return this.http.get<DateCount[]>(`${this.apiUrl}/countByDate`, { headers });
+  }
   private handleError(error: HttpErrorResponse) {
     let errorMessage = 'Ocurrió un error desconocido.';
     if (error.error instanceof ErrorEvent) {
@@ -30,29 +61,5 @@ export class IncidentService {
     }
     console.error(errorMessage);
     return throwError(() => new Error(errorMessage));
-  }
-
-  getCountByLocality(): Observable<LocalityCount[]> {
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${localStorage.getItem('token')}`
-    });
-    return this.http.get<LocalityCount[]>(`${this.apiUrl}/countByLocality`, { headers });
-  }
-
-  getCountByCategory(): Observable<CategoryCount[]> {
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${localStorage.getItem('token')}`
-    });
-    return this.http.get<CategoryCount[]>(`${this.apiUrl}/countByCategory`, { headers });
-  }
-
-  getCountByDate(): Observable<DateCount[]> {
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${localStorage.getItem('token')}`
-    });
-    return this.http.get<DateCount[]>(`${this.apiUrl}/countByDate`, { headers });
   }
 }

@@ -8,6 +8,7 @@ import { AddCategoryComponent } from './add-category/add-category.component';
 import { UpdateCategoryComponent } from './update-category/update-category.component';
 import { AllCategoryComponent } from './all-category/all-category.component';
 import { AllUserComponent } from './all-user/all-user.component';
+import { BaseChartDirective } from 'ng2-charts';
 @NgModule({
   declarations: [
     DashboardComponent,
@@ -21,7 +22,7 @@ import { AllUserComponent } from './all-user/all-user.component';
     AdminRoutingModule,
     FormsModule,
     AlertModule.forRoot(),
-    
+    BaseChartDirective
   ],
 })
 export class AdminModule {}

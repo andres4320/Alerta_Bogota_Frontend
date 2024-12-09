@@ -54,4 +54,20 @@ export class CategoryService {
       responseType: 'text' as 'json',
     });
   }
+
+  getCategoryCount(): Observable<number> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('token')}`
+    });
+    return this.http.get<number>(`${this.baseUrl}/countCategories`, { headers });
+  }
+
+  getMostUsedCategories(): Observable<any[]> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('token')}`
+    });
+    return this.http.get<any[]>(`${this.baseUrl}/mostUsedCategories`, { headers });
+  }
 }
