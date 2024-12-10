@@ -60,6 +60,14 @@
       </form>
 
       <button class="btn btn-danger btn-block mt-3" (click)="loginWithGoogle()">Registrarse con Google</button>
+
+      <div *ngIf="fieldAlerts['useEmail']" class="form-group text-left">
+        <div class="alert alert-danger mt-2">
+          {{ fieldAlerts['useEmail'] }}
+          <a href="/login" class="btn-link ms-2">Inicia sesión aquí</a>
+        </div>
+      </div>
+
     </div>
 
     <!-- Toast Container -->

@@ -61,8 +61,7 @@ export class CregisterComponent {
         try {
           const exists = await this.authService.validateEmail(this.user.useEmail).toPromise();
           if (exists) {
-            alert('El correo ya está registrado. Por favor, inicia sesión.');
-            this.router.navigate(['/login']); 
+            this.fieldAlerts['useEmail'] = 'El correo ya está registrado. Por favor, inicia sesión.';
           } else {
             console.log('Correo no registrado. Mostrando modal de registro.');
             this.showModal = true;
