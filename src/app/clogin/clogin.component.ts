@@ -14,6 +14,7 @@ export class CloginComponent {
   pwd: string = '';
   errorMessage: string = '';
   loading: boolean = false;
+  showRegisterLink: boolean = false;
 
   constructor(private authService: AuthService, private userService: UserService, private router: Router) {}
 
@@ -56,7 +57,8 @@ export class CloginComponent {
           this.router.navigate(['/user']);
         } else {
           console.error('Correo no verificado.');
-          this.errorMessage = 'El correo no está registrado en nuestra base de datos.';
+          this.errorMessage = 'Debes registrarte primero para poder seguir.';
+          this.showRegisterLink = true;
         }
         this.loading = false;
       },
@@ -64,6 +66,7 @@ export class CloginComponent {
         console.error('Error al iniciar sesión con Google:', error);
         this.errorMessage = error.message || 'Error al iniciar sesión con Google. Inténtalo nuevamente.';
         this.loading = false;
+        
       }
     });
   }
