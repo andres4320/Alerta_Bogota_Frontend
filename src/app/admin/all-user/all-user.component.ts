@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../service/user.service';
 import { User } from '../../model/user.model';
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-all-user',
   templateUrl: './all-user.component.html',
@@ -9,11 +11,26 @@ import { User } from '../../model/user.model';
 export class AllUserComponent implements OnInit{
   users: User[] = [];
 
-  constructor(private userService: UserService) {}
+  constructor(private userService: UserService, private router: Router) {}
 
   ngOnInit(): void {
     this.loadUsers();
   }
+  getRoleName(rolId: number): string {
+    if (rolId === 1) {
+      return 'Usuario';
+    } else if (rolId === 2) {
+      return 'Administrador';
+    } else {
+      return 'Desconocido'; // Por si llegan valores inesperados
+    }
+  }
+  
+
+  editarUsuario(id: number): void {
+    this.router.navigate(['/admin/update-user', id]);
+  }
+
 
   loadUsers(): void {
     this.userService.listAllUsers().subscribe({
