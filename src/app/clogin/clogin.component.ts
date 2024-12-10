@@ -57,7 +57,6 @@ export class CloginComponent {
         } else {
           console.error('Correo no verificado.');
           this.errorMessage = 'El correo no está registrado en nuestra base de datos.';
-          alert('El correo no está registrado en nuestra base de datos.');
         }
         this.loading = false;
       },

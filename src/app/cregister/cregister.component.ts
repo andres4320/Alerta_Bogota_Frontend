@@ -16,6 +16,7 @@ export class CregisterComponent {
   showModal = false;
   alerts: { type: string; message: string }[] = [];
   fieldAlerts: { [key: string]: string } = {};
+  loading: boolean = false;
 
   constructor(private userService: UserService, private authService: AuthService, private router: Router) {
     this.user = {
@@ -51,7 +52,8 @@ export class CregisterComponent {
     });
   }  
 
-  loginWithGoogle() {
+  registerWithGoogle() {
+    this.loading = true;
     this.authService.loginWithGoogle().subscribe({
       next: async user => {
         console.log('Usuario autenticado con Google:', user);
@@ -70,10 +72,12 @@ export class CregisterComponent {
           console.error('Error al verificar el correo:', error);
           alert('Error al verificar el correo. Inténtalo nuevamente.');
         }
+        this.loading = false;
       },
       error: error => {
         console.error('Error al iniciar sesión con Google:', error);
         alert('Error al iniciar sesión con Google.');
+        this.loading = false;  
       }
     });
   }

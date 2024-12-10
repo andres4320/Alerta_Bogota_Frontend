@@ -16,7 +16,11 @@
                 </div>
                 <button type="submit" class="btn btn-primary btn-block">Iniciar Sesión</button>
             </form>
-            <button (click)="loginWithGoogle()" class="btn btn-danger btn-block mt-3">Iniciar Sesión con Google</button>
+            <button (click)="loginWithGoogle()" class="btn btn-danger btn-block mt-3">
+                Iniciar sesión con 
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Google_%22G%22_logo.svg/1200px-Google_%22G%22_logo.svg.png" alt="Google" style="width: 30px; height: 30px; margin-left: 8px;">
+            </button>
+              
 
             <!-- Indicador de carga -->
             <div *ngIf="loading" class="mt-3">
