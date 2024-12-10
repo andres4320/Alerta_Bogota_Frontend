@@ -1,6 +1,6 @@
 .container {
-    margin-top: 200px; 
-    margin-bottom: 180px; 
+    margin-top: 270px; 
+    margin-bottom: 380px; 
 }
 
 .profile-image {
@@ -16,3 +16,21 @@
     border-radius: 15px; 
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
 }
+
+.toast-container {
+    position: fixed;
+    top: 1rem; 
+    right: 1rem;
+    z-index: 1100; 
+  }
+  
+  .toast {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 0.5rem;
+  }
+  
+  .toast-body {
+    padding: 1rem 1.5rem;
+    font-size: 1.25rem; 
+  }
+  

@@ -5,71 +5,154 @@
         <img src="https://cdn3d.iconscout.com/3d/premium/thumb/profile-3d-icon-download-in-png-blend-fbx-gltf-file-formats--user-avatar-account-interface-pack-icons-5220669.png?f=webp" alt="Profile" class="profile-image" />
       </div>
       <h3 class="card-title">Registro</h3>
+
       <form (ngSubmit)="register()" #registerForm="ngForm">
         <!-- Campos del formulario -->
         <div class="form-group text-left">
           <label for="primer_nombre">Primer Nombre</label>
           <input type="text" class="form-control" id="primer_nombre" name="primerNombre" [(ngModel)]="user.primerNombre" required placeholder="Ingresa tu primer nombre">
+          <div *ngIf="fieldAlerts['primerNombre']" class="alert alert-danger mt-2">
+            {{ fieldAlerts['primerNombre'] }}
+          </div>
         </div>
+
         <div class="form-group text-left">
           <label for="segundo_nombre">Segundo Nombre</label>
           <input type="text" class="form-control" id="segundo_nombre" name="segundoNombre" [(ngModel)]="user.segundoNombre" placeholder="Ingresa tu segundo nombre (opcional)">
+          <div *ngIf="fieldAlerts['segundoNombre']" class="alert alert-danger mt-2">
+            {{ fieldAlerts['segundoNombre'] }}
+          </div>
         </div>
+
         <div class="form-group text-left">
           <label for="primer_apellido">Primer Apellido</label>
           <input type="text" class="form-control" id="primer_apellido" name="primerApellido" [(ngModel)]="user.primerApellido" required placeholder="Ingresa tu primer apellido">
+          <div *ngIf="fieldAlerts['primerApellido']" class="alert alert-danger mt-2">
+            {{ fieldAlerts['primerApellido'] }}
+          </div>
         </div>
+
         <div class="form-group text-left">
           <label for="segundo_apellido">Segundo Apellido</label>
           <input type="text" class="form-control" id="segundo_apellido" name="segundoApellido" [(ngModel)]="user.segundoApellido" placeholder="Ingresa tu segundo apellido (opcional)">
+          <div *ngIf="fieldAlerts['segundoApellido']" class="alert alert-danger mt-2">
+            {{ fieldAlerts['segundoApellido'] }}
+          </div>
         </div>
+
         <div class="form-group text-left">
           <label for="use_email">Correo Electrónico</label>
           <input type="email" class="form-control" id="use_email" name="useEmail" [(ngModel)]="user.useEmail" required placeholder="Ingresa tu correo electrónico">
+          <div *ngIf="fieldAlerts['useEmail']" class="alert alert-danger mt-2">
+            {{ fieldAlerts['useEmail'] }}
+          </div>
         </div>
+
         <div class="form-group text-left">
           <label for="use_pass">Contraseña</label>
           <input type="password" class="form-control" id="use_pass" name="usePass" [(ngModel)]="user.usePass" required placeholder="Crea una contraseña">
+          <div *ngIf="fieldAlerts['usePass']" class="alert alert-danger mt-2">
+            {{ fieldAlerts['usePass'] }}
+          </div>
         </div>
+
         <button type="submit" class="btn btn-primary btn-block">Registrarse</button>
       </form>
+
       <button class="btn btn-danger btn-block mt-3" (click)="loginWithGoogle()">Registrarse con Google</button>
     </div>
-  </div>
+
+    <!-- Toast Container -->
+    <div
+      class="toast-container position-fixed top-0 end-0 p-4"
+      style="z-index: 1100; width: 400px;"
+    >
+      <div
+        *ngFor="let alert of alerts; let i = index"
+        class="toast align-items-center border-0 show"
+        role="alert"
+        aria-live="assertive"
+        aria-atomic="true"
+        style="background-color: #198754; color: white; min-width: 100%; font-size: 1.25rem; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); border-radius: 0.5rem;"
+      >
+        <div class="d-flex">
+          <div class="toast-body">
+            {{ alert.message }}
+          </div>
+          <button
+            type="button"
+            class="btn-close btn-close-white me-2 m-auto"
+            aria-label="Close"
+            (click)="closeAlert(i)"
+          ></button>
+        </div>
+      </div>
+    </div>
+
+ </div>
 
   <!-- Modal para completar datos -->
   <div *ngIf="showModal" class="modal fade show" style="display: block; background: rgba(0, 0, 0, 0.5);">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Completa tus datos</h5>
-          <button type="button" class="btn-close" (click)="showModal = false"></button>
-        </div>
-        <div class="modal-body">
-          <p>Para continuar, completa los siguientes campos para registrarte:</p>
-          <form (ngSubmit)="register()">
-            <div class="form-group">
-              <label for="modal_primer_nombre">Primer Nombre</label>
-              <input type="text" class="form-control" id="modal_primer_nombre" name="modalPrimerNombre" [(ngModel)]="user.primerNombre" required placeholder="Ingresa tu primer nombre">
-            </div>
-            <div class="form-group">
-              <label for="modal_segundo_nombre">Segundo Nombre</label>
-              <input type="text" class="form-control" id="modal_segundo_nombre" name="modalSegundoNombre" [(ngModel)]="user.segundoNombre" placeholder="Ingresa tu segundo nombre (opcional)">
-            </div>
-            <div class="form-group">
-              <label for="modal_primer_apellido">Primer Apellido</label>
-              <input type="text" class="form-control" id="modal_primer_apellido" name="modalPrimerApellido" [(ngModel)]="user.primerApellido" required placeholder="Ingresa tu primer apellido">
-            </div>
-            <div class="form-group">
-              <label for = "modal_segundo_apellido">Segundo Apellido</label>
-              <input type = "text"class ="form-control"id = "modal_segundo_apellido"name = "modalSegundoApellido"
-                [(ngModel)] = "user.segundoApellido"
-                placeholder = "Ingresa tu segundo apellido (opcional)">
-            </div>
-            <button type = "submit"class = "btn btn-primary btn-block">Registrar</button>
-          </form>
-        </div>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Completa tus datos</h5>
+        <button type="button" class="btn-close" (click)="showModal = false"></button>
+      </div>
+      <div class="modal-body">
+        <p>Para continuar, completa los siguientes campos para registrarte:</p>
+        <form (ngSubmit)="register()">
+          <div class="form-group">
+            <label for="modal_primer_nombre">Primer Nombre</label>
+            <input
+              type="text"
+              class="form-control"
+              id="modal_primer_nombre"
+              name="modalPrimerNombre"
+              [(ngModel)]="user.primerNombre"
+              required
+              placeholder="Ingresa tu primer nombre"
+            />
+          </div>
+          <div class="form-group">
+            <label for="modal_segundo_nombre">Segundo Nombre</label>
+            <input
+              type="text"
+              class="form-control"
+              id="modal_segundo_nombre"
+              name="modalSegundoNombre"
+              [(ngModel)]="user.segundoNombre"
+              placeholder="Ingresa tu segundo nombre (opcional)"
+            />
+          </div>
+          <div class="form-group">
+            <label for="modal_primer_apellido">Primer Apellido</label>
+            <input
+              type="text"
+              class="form-control"
+              id="modal_primer_apellido"
+              name="modalPrimerApellido"
+              [(ngModel)]="user.primerApellido"
+              required
+              placeholder="Ingresa tu primer apellido"
+            />
+          </div>
+          <div class="form-group">
+            <label for="modal_segundo_apellido">Segundo Apellido</label>
+            <input
+              type="text"
+              class="form-control"
+              id="modal_segundo_apellido"
+              name="modalSegundoApellido"
+              [(ngModel)]="user.segundoApellido"
+              placeholder="Ingresa tu segundo apellido (opcional)"
+            />
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">Registrar</button>
+        </form>
       </div>
     </div>
   </div>
 </div>
+
+

@@ -12,8 +12,8 @@ export class UserService {
 
   constructor(private http: HttpClient) {}
 
-  registerUser(user: User): Observable<string> {
-    return this.http.post<string>(`${this.apiUrl}/register`, user).pipe(
+  registerUser(user: User): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/register`, user).pipe(
       catchError(this.handleError)
     );
   }
@@ -52,11 +52,17 @@ export class UserService {
 
   private handleError(error: HttpErrorResponse) {
     let errorMessage = 'Ocurrió un error desconocido.';
+    
+    if (error.error && typeof error.error === 'object') {
+      return throwError(() => error.error);
+    }
+  
     if (error.error instanceof ErrorEvent) {
       errorMessage = `Error: ${error.error.message}`;
     } else {
       errorMessage = `Código de estado: ${error.status}, Mensaje: ${error.message}`;
     }
+    
     console.error(errorMessage);
     return throwError(() => new Error(errorMessage));
   }

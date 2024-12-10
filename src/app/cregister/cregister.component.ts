@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { UserService } from '../service/user.service'; 
-import { AuthService } from '../service/auth.service'; // Importa AuthService para login con Google
+import { AuthService } from '../service/auth.service';
 import { Router } from '@angular/router';
 import { User } from '../model/user.model';
 
@@ -14,6 +14,8 @@ export class CregisterComponent {
 
   user: User;
   showModal = false;
+  alerts: { type: string; message: string }[] = [];
+  fieldAlerts: { [key: string]: string } = {};
 
   constructor(private userService: UserService, private authService: AuthService, private router: Router) {
     this.user = {
@@ -30,17 +32,24 @@ export class CregisterComponent {
   }
 
   register() {
+    // Limpiar alertas previas
+    this.fieldAlerts = {};
+  
     this.userService.registerUser(this.user).subscribe({
       next: response => {
-        alert('Usuario registrado exitosamente');
-        this.router.navigate(['/login']);
+        this.showAlert('success', 'Usuario registrado exitosamente');
+        setTimeout(() => this.router.navigate(['/login']), 5000);
       },
       error: err => {
-        alert(`Error al registrar el usuario: ${err.message}`);
-        console.error('Error:', err);
+        if (typeof err === 'object') {
+          
+          this.fieldAlerts = err; 
+        } else {
+          this.fieldAlerts['general'] = 'Error al registrar el usuario.';
+        }
       }
     });
-  }
+  }  
 
   loginWithGoogle() {
     this.authService.loginWithGoogle().subscribe({
@@ -56,7 +65,7 @@ export class CregisterComponent {
             this.router.navigate(['/login']); 
           } else {
             console.log('Correo no registrado. Mostrando modal de registro.');
-            this.showModal = true; // Muestra el modal para registrar al nuevo usuario
+            this.showModal = true;
           }
         } catch (error) {
           console.error('Error al verificar el correo:', error);
@@ -68,5 +77,21 @@ export class CregisterComponent {
         alert('Error al iniciar sesión con Google.');
       }
     });
+  }
+
+  showAlert(type: string, message: string): void {
+    const alert = { type, message };
+    this.alerts.push(alert);
+  
+    setTimeout(() => {
+      const index = this.alerts.indexOf(alert);
+      if (index !== -1) {
+        this.alerts.splice(index, 1);
+      }
+    }, 15000);
+  }
+
+  closeAlert(index: number): void {
+    this.alerts.splice(index, 1);
   }
 }
