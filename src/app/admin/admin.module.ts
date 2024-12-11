@@ -9,6 +9,7 @@ import { UpdateCategoryComponent } from './update-category/update-category.compo
 import { AllCategoryComponent } from './all-category/all-category.component';
 import { AllUserComponent } from './all-user/all-user.component';
 import { BaseChartDirective } from 'ng2-charts';
+import { UpdateUserComponent } from './update-user/update-user.component';
 @NgModule({
   declarations: [
     DashboardComponent,
@@ -16,6 +17,7 @@ import { BaseChartDirective } from 'ng2-charts';
     UpdateCategoryComponent,
     AllCategoryComponent,
     AllUserComponent,
+    UpdateUserComponent,
   ],
   imports: [
     CommonModule,

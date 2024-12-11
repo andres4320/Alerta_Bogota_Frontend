@@ -5,6 +5,7 @@ import { AddCategoryComponent } from './add-category/add-category.component';
 import { UpdateCategoryComponent } from './update-category/update-category.component';
 import { AllCategoryComponent } from './all-category/all-category.component';
 import { AllUserComponent } from './all-user/all-user.component';
+import { UpdateUserComponent } from './update-user/update-user.component';
 import { AuthGuard } from '../auth/auth.guard';
 
 const routes: Routes = [
@@ -12,6 +13,7 @@ const routes: Routes = [
   { path: 'add-category', component: AddCategoryComponent, canActivate: [AuthGuard], data: { expectedRole: 'ADMINISTRADOR' } },
   { path: 'update-category/:id', component: UpdateCategoryComponent, canActivate: [AuthGuard], data: { expectedRole: 'ADMINISTRADOR' } },
   { path: 'all-categories', component: AllCategoryComponent, canActivate: [AuthGuard], data: { expectedRole: 'ADMINISTRADOR' } },
+  { path: 'update-user/:id', component:  UpdateUserComponent, canActivate: [AuthGuard], data: { expectedRole: 'ADMINISTRADOR' } },
   { path: 'all-user', component: AllUserComponent, canActivate: [AuthGuard], data: { expectedRole: 'ADMINISTRADOR' } },
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' }, 
 ];

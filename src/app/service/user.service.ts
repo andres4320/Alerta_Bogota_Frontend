@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse,HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { User } from '../model/user.model'; 
+import { User } from '../model/user.model';  
 
 @Injectable({
   providedIn: 'root'
@@ -19,16 +19,39 @@ export class UserService {
   }
 
   listAllUsers(): Observable<User[]> {
-    return this.http.get<User[]>(`${this.apiUrl}/all-users`).pipe(
-      catchError(this.handleError)
-    );
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+    });
+  
+    return this.http.get<User[]>(`${this.apiUrl}/all-users`, { headers });
   }
 
   deleteUser(userId: number): Observable<string> {
-    return this.http.delete<string>(`${this.apiUrl}/delete`, { body: { usuarioId: userId } }).pipe(
-      catchError(this.handleError)
-    );
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+    });
+
+    return this.http
+      .delete<string>(`${this.apiUrl}/delete`, {
+        headers,
+        body: { usuarioId: userId },
+      })
+      .pipe(catchError(this.handleError));
   }
+
+  updateUser(user: User): Observable<string> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('token')}`,
+    });
+  
+    return this.http
+      .put<string>(`${this.apiUrl}/update`, user, { headers })
+      .pipe(catchError(this.handleError));
+  }
+  
 
   getStatsByRoles(): Observable<any[]> {
     const headers = new HttpHeaders({
@@ -49,6 +72,8 @@ export class UserService {
       catchError(this.handleError)
     );
   }
+
+
 
   private handleError(error: HttpErrorResponse) {
     let errorMessage = 'Ocurrió un error desconocido.';

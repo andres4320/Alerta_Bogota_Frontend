@@ -1,0 +1,94 @@
+<div class="container mt-4">
+    <h2 class="mb-4">Actualizar Rol del Usuario</h2>
+  
+    <div *ngIf="alerts.length > 0" class="mb-3">
+      <div
+        *ngFor="let alert of alerts; let i = index"
+        class="alert"
+        [ngClass]="'alert-' + alert.type"
+        role="alert"
+      >
+        {{ alert.message }}
+        <button
+          type="button"
+          class="btn-close"
+          aria-label="Close"
+          (click)="closeAlert(i)"
+        ></button>
+      </div>
+    </div>
+  
+    <form (ngSubmit)="updateUserRole()">
+      <div class="mb-3">
+        <label for="primerNombre" class="form-label">Primer Nombre</label>
+        <input
+          type="text"
+          id="primerNombre"
+          class="form-control"
+          [(ngModel)]="user.primerNombre"
+          name="primerNombre"
+          disabled
+        />
+      </div>
+      <div class="mb-3">
+        <label for="segundoNombre" class="form-label">Segundo Nombre</label>
+        <input
+          type="text"
+          id="segundoNombre"
+          class="form-control"
+          [(ngModel)]="user.segundoNombre"
+          name="segundoNombre"
+          disabled
+        />
+      </div>
+      <div class="mb-3">
+        <label for="primerApellido" class="form-label">Primer Apellido</label>
+        <input
+          type="text"
+          id="primerApellido"
+          class="form-control"
+          [(ngModel)]="user.primerApellido"
+          name="primerApellido"
+          disabled
+        />
+      </div>
+      <div class="mb-3">
+        <label for="segundoApellido" class="form-label">Segundo Apellido</label>
+        <input
+          type="text"
+          id="segundoApellido"
+          class="form-control"
+          [(ngModel)]="user.segundoApellido"
+          name="segundoApellido"
+          disabled
+        />
+      </div>
+      <div class="mb-3">
+        <label for="email" class="form-label">Correo Electrónico</label>
+        <input
+          type="email"
+          id="email"
+          class="form-control"
+          [(ngModel)]="user.useEmail"
+          name="email"
+          disabled
+        />
+      </div>
+      <div class="mb-3">
+        <label for="rol" class="form-label">Rol</label>
+        <select
+          id="rol"
+          class="form-select form-select-lg mb-3"
+          [(ngModel)]="user.rolId"
+          name="rol"
+          required
+        >
+          <option value="" disabled selected>Seleccione un rol</option> 
+          <option [value]="1">Usuario</option>
+          <option [value]="2">Administrador</option>
+        </select>
+      </div>
+    <button type="submit" class="btn btn-primary">Actualizar Rol</button>
+    </form>
+  </div>
+  
