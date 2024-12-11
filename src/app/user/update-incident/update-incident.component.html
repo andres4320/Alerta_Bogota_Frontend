@@ -1,1 +1,64 @@
-<p>update-incident works!</p>
+<!-- <div class="container mt-4">
+    <h2 class="mb-4">Actualizar Incidencia</h2>
+  
+    <div *ngIf="alerts.length > 0" class="mb-3">
+      <alert
+        *ngFor="let alert of alerts; let i = index"
+        [type]="alert.type"
+        (onClosed)="closeAlert(i)"
+        [dismissible]="true"
+      >
+        {{ alert.message }}
+      </alert>
+    </div>
+  
+    <form (ngSubmit)="updateIncidencia()">
+      <div class="mb-3">
+        <label for="descripcion" class="form-label">Descripción</label>
+        <input
+          type="text"
+          id="descripcion"
+          class="form-control"
+          [(ngModel)]="incidencia.descripcion"
+          name="descripcion"
+          required
+        />
+      </div>
+      <div class="mb-3">
+        <label for="direccion" class="form-label">Dirección</label>
+        <input
+          type="text"
+          id="direccion"
+          class="form-control"
+          [(ngModel)]="incidencia.direccion"
+          name="direccion"
+          required
+        />
+      </div>
+      <div class="mb-3">
+        <label for="fecha" class="form-label">Fecha</label>
+        <input
+          type="date"
+          [value]="getFormattedDate(incidencia.fecha)"
+          id="fecha"
+          class="form-control"
+          [(ngModel)]="incidencia.fecha"
+          name="fecha"
+          required
+        />
+      </div>
+      <div class="mb-3">
+        <label for="localidad" class="form-label">Localidad</label>
+        <input
+          type="text"
+          id="localidad"
+          class="form-control"
+          [(ngModel)]="incidencia.localidad"
+          name="localidad"
+          required
+        />
+      </div>
+      <button type="submit" class="btn btn-primary">Actualizar</button>
+    </form>
+  </div>
+   -->

@@ -15,8 +15,14 @@ export class IncidentService {
 
   constructor(private http: HttpClient) {}
 
-  registerUser(incident: Incident): Observable<string> {
-    return this.http.post<string>(`${this.apiUrl}/postIncidence`, incident).pipe(
+// Método para registrar un incidente
+  registerIncident(incident: Incident): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${localStorage.getItem('token')}`
+    });
+
+    return this.http.post(`${this.apiUrl}/postIncidence`, incident).pipe(
       catchError(this.handleError)
     );
   }
@@ -76,4 +82,16 @@ export class IncidentService {
 
       return this.http.delete(`${this.apiUrl}/deleteIncidence?id=${id}`, { headers, responseType: 'text' as 'json' });
   }  
+
+updateIncidencia(incidencia: Incident): Observable<string> {
+  const headers = new HttpHeaders({
+    'Content-Type': 'application/json',
+    Authorization: `Bearer ${localStorage.getItem('token')}`
+  });
+
+  return this.http.put<string>(`${this.apiUrl}/updateIncidence`, incidencia, { headers, responseType: 'text' as 'json' })
+    .pipe(
+      catchError(this.handleError)
+    );
+}
 }

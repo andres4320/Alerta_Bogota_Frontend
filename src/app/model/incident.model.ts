@@ -1,3 +1,5 @@
+import { Categoria } from './category.model';  
+import  { User } from './user.model'; 
 export interface Incident {
   incidenciaId: number;
   descripcion: string;
@@ -6,6 +8,6 @@ export interface Incident {
   latitud: number;
   longitud: number;
   localidad: string;
-  usuario_id: number; 
-  categoria_id: number
+  usuarioId: number;
+  categoriaId: number;
 }

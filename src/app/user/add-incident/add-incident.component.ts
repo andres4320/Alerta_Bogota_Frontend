@@ -3,7 +3,8 @@ import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { IncidentService } from '../../service/incident.service';
 import { Incident } from '../../model/incident.model';
-
+import { CategoryService } from '../../service/category.service'; // Importa el servicio de categorías
+import { Categoria } from '../../model/category.model'; // Asegúrate de tener este modelo
 @Component({
   selector: 'app-add-incident',
   templateUrl: './add-incident.component.html',
@@ -19,10 +20,14 @@ export class AddIncidentComponent {
     latitud: 4.60971, 
     longitud: -74.08175, 
     localidad: '',
-    usuario_id: 0,
-    categoria_id: 0
+    usuarioId: 0,
+    categoriaId: 0
   
   };
+
+  categorias: Categoria[] = []; // Propiedad para almacenar las categorías
+
+
   mapOptions: google.maps.MapOptions = {
     center: { lat: this.incident.latitud, lng: this.incident.longitud },
     zoom: 14,
@@ -35,10 +40,25 @@ export class AddIncidentComponent {
   constructor(
     private incidentService: IncidentService,
     private router: Router,
-    private http: HttpClient
+    private http: HttpClient,
+    private categoryService: CategoryService 
   ) {}
 
+  ngOnInit(): void {
+    this.loadCategories(); // Carga las categorías al inicializar el componente
+  }
 
+  loadCategories(): void {
+    this.categoryService.getAllCategorias().subscribe(
+      (data) => {
+        this.categorias = data; 
+        console.log('Categorías cargadas:', this.categorias);
+      },
+      (error) => {
+        console.error('Error al cargar categorías', error);
+      }
+    );
+  }
   
 
   // Método para obtener coordenadas
@@ -83,20 +103,41 @@ export class AddIncidentComponent {
       }    }
   }
 
+
   // Método para registrar la incidencia
   async register() {
     try {
       await this.updateMap(); // Asegurar que las coordenadas estén actualizadas
-      this.incidentService.registerUser(this.incident).subscribe({
+      
+      // Obtener el ID del usuario desde localStorage
+      const usuario = JSON.parse(localStorage.getItem('usuario') || '{}');
+      const usuarioId = usuario.usuarioId; // Obtén el ID del usuario
+      console.log('ID del usuario:', usuarioId);
+      if (!usuarioId) {
+        alert('No se ha encontrado el usuario. Asegúrate de estar autenticado.');
+        return;
+      }
+
+      // Asignar el ID del usuario y categoría seleccionada al objeto incident
+      this.incident.usuarioId = usuarioId;
+      this.incident.categoriaId = Number(this.incident.categoriaId); 
+      
+      // Registrar la incidencia
+      this.incidentService.registerIncident(this.incident).subscribe({
         next: response => {
-          alert(JSON.stringify(response));
+          console.log('Datos a enviar:', this.incident);
+          console.log('Incidente a enviar:', this.incident);
+
+          alert('Incidencia registrada con éxito!');
           this.router.navigate(['postIncidence']);
         },
         error: err => {
           alert(`Error al registrar la incidencia: ${err.message}`);
+          console.log('Datos a enviar:', this.incident);
           console.error('Error:', err);
         }
       });
+      
     } catch (error) {
       const errorMessage = (error as Error).message || 'Error desconocido';
       alert(`Error al registrar la incidencia: ${errorMessage}`);

@@ -39,41 +39,40 @@
                                   
                 <div class="form-group text-left">
                     <label for="fecha">Fecha</label>
-                    <input type="date" class="form-control" id="fecha" name="fecha"  [(ngModel)]="incident.fecha" required placeholder="Ingresa la fecha de cuando ocurrió la incidencia">
+                    <input type="date" class="form-control" id="fecha" name="fecha" [(ngModel)]="incident.fecha" required placeholder="Ingresa la fecha de cuando ocurrió la incidencia">
                 </div>
                 <div class="form-group text-left">
                     <label for="localidad">Localidad</label>
-                    <select class="form-control" id="localidad" name="localidad" [(ngModel)]="incident.localidad" required placeholder="Ingresa la localidad donde ocurrió de la incidencia">
+                    <select class="form-control" id="localidad" name="localidad" [(ngModel)]="incident.localidad"   required placeholder="Ingresa la localidad donde ocurrió de la incidencia">
                         <option value="" disabled selected>Selecciona la localidad donde ocurrió de la incidencia</option>
-                        <option value="1">1. Usaquén</option>
-                        <option value="2">2. Chapinero</option>
-                        <option value="3">3. Santa Fe</option>
-                        <option value="4">4. San Cristóbal</option>
-                        <option value="5">5. Usme</option>
-                        <option value="6">6. Tunjuelito</option>
-                        <option value="7">7. Bosa</option>
-                        <option value="8">8. Kennedy</option>
-                        <option value="9">9. Fontibón</option>
-                        <option value="10">10. Engativá</option>
-                        <option value="11">11. Suba</option>
-                        <option value="12">12. Barrios Unidos</option>
-                        <option value="13">13. Teusaquillo</option>
-                        <option value="14">14. Los Mártires</option>
-                        <option value="15">15. Antonio Nariño</option>
-                        <option value="16">16. Puente Aranda</option>
-                        <option value="17">17. Candelaria</option>
-                        <option value="18">18. Rafael Uribe Uribe</option>
-                        <option value="19">19. Ciudad Bolívar</option>
-                        <option value="20">20. Sumapaz</option>
+                        <option value="Usaquén">1. Usaquén</option>
+                        <option value="Chapinero">2. Chapinero</option>
+                        <option value="Santa Fe">3. Santa Fe</option>
+                        <option value="San Cristóbal">4. San Cristóbal</option>
+                        <option value="Usme">5. Usme</option>
+                        <option value="Tunjuelito">6. Tunjuelito</option>
+                        <option value="Bosa">7. Bosa</option>
+                        <option value="Kennedy">8. Kennedy</option>
+                        <option value="Fontibón">9. Fontibón</option>
+                        <option value="Engativá">10. Engativá</option>
+                        <option value="Suba">11. Suba</option>
+                        <option value="Barrios Unidos">12. Barrios Unidos</option>
+                        <option value="Teusaquillo">13. Teusaquillo</option>
+                        <option value="Los Mártires">14. Los Mártires</option>
+                        <option value="Antonio Nariño">15. Antonio Nariño</option>
+                        <option value="Puente Aranda">16. Puente Aranda</option>
+                        <option value="Candelaria">17. Candelaria</option>
+                        <option value="Rafael Uribe Uribe">18. Rafael Uribe Uribe</option>
+                        <option value="Ciudad Bolívar">19. Ciudad Bolívar</option>
+                        <option value="Sumapaz">20. Sumapaz</option>
                     </select>
                 </div>
                 <div class="form-group text-left">
                     <label for="categoria_id">Categoría</label>
-                    <select class="form-control" id="categoria_id" name="categoria_id" [(ngModel)]="incident.categoria_id" required placeholder="Ingresa la localidad donde ocurrió de la incidencia">
+                    <select class="form-control" id="categoria_id" name="categoria_id" [(ngModel)]="incident.categoriaId" required>
                         <option value="" disabled selected>Selecciona la categoría a la que pertenece el incidente</option>
-                        <option value="1">RoboCiudad</option>
-                        <option value="2">Extorsion</option>
-                    </select>
+                        <option *ngFor="let categoria of categorias" [value]="categoria.categoriaId">{{ categoria.nombreCategoria }}</option>
+                    </select>          
                 </div>
 
                 <button type="submit" class="btn btn-primary btn-block">Registrar Incidencia</button>

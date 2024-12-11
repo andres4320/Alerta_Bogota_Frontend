@@ -6,17 +6,23 @@ import { Incident } from '../../model/incident.model';  // Asegúrate de que est
 @Component({
   selector: 'app-all-incident',
   templateUrl: './all-incident.component.html',
-  styleUrls: ['./all-incident.component.css']  // Corregido el nombre del archivo de estilo
+  styleUrls: ['./all-incident.component.css'] 
+
 })
 export class AllIncidentComponent implements OnInit {
-  incidencias: Incident[] = [];  // Especificamos el tipo de datos como 'Incident'
+  incidencias: Incident[] = []; 
   errorMessage: string = '';  // Mensaje de error en caso de que algo falle
-
+  
   constructor(private incidentService: IncidentService, private router: Router) {}  // Corregido el nombre del servicio
 
   ngOnInit(): void {
     this.getIncidencias();
   }
+
+  editarIncidencia(id: number): void {
+    this.router.navigate(['/user/update-incident', id]);
+  }
+
 
   // Método para obtener las incidencias del usuario
   getIncidencias() {
@@ -31,7 +37,7 @@ export class AllIncidentComponent implements OnInit {
     this.incidentService.getIncidenciasByUsuarioId(usuarioId).subscribe({
       next: (data) => {
         this.incidencias = data;
-        console.log('Usuarios cargados:', this.incidencias);
+        console.log('Incidencias recibidas:', this.incidencias);
       },
       error: (err) => {
         console.error('Error al obtener incidencias:', err);
